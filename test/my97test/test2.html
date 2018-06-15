@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.8.3.min.js"></script>
+    <script src="../My97DatePicker/WdatePicker.js"></script>
+    <script>
+       $('#beginTime').val($('#d4321').val());
+        $('#endTime').val($('#d4322').val());
+
+        //$("#startSpan").attr("onclick", WdatePicker({el:'startDate',dateFmt:'yyyy-M-d ',maxDate:'#F{$dp.$D(\'endDate\')}'}));
+    </script>
+</head>
+<body>
+
+<input type="text"class="Wdate"id="d4321"onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4322\',{d:-3});}'})"/>
+<input type="text"   class="Wdate" id="d4322" onFocus="WdatePicker()"/>
+
+<input type="hidden" name="beginTime" id="beginTime" value="" />
+<input type="hidden" name="endTime" id="endTime" value="" />
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div id="ss" class=" fl">
+    <input type="text" id="startDate" class="timeFrom fl">
+    <span id="startSpan" onclick="WdatePicker({el:'startDate',dateFmt:'yyyy-M-d ',maxDate:'%y-%M-%d '})" class="timeIco fr bgimage">gggg</span>
+    </input>
+</div>
+<div id="dd" class=" fl">
+    <input type="text" id="endDate" class="timeFrom fl" onchange="endDateChanged()">
+    <span onclick="WdatePicker({el:'endDate',dateFmt:'yyyy-M-d ',maxDate:'%y-%M-%d ',minDate:'#F{$dp.$D(\'startDate\')}'})" class="timeIco fr bgimage">gggg</span>
+    </input>
+</div>
+<script>
+
+
+</script>
+</body>
+</html>

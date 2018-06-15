@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.8.3.min.js"></script>
+    <script src="../My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function(){
+            $("#startTime").bind("click",function(){
+                WdatePicker({doubleCalendar:true,startDate:'%y-{%M-1}-%d',dateFmt:'yyyy-MM-dd',autoPickDate:true,maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}',onpicked:function(){endTime.click();}});
+            });
+            $("#endTime").bind("click",function(){
+                WdatePicker({doubleCalendar:true,startDate:'%y-{%M-1}-%d',minDate:'#F{$dp.$D(\'startTime\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd',autoPickDate:true});
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+<input type="text" id="startTime" placeholder="起始日期"/> -
+<input type="text" id="endTime" placeholder="结束日期"/>
+<br/>
+<br/>
+<br/>
+
+
+<input id="d5221" class="Wdate" type="text" onclick="var d5222=$dp.$('d5222');WdatePicker({onpicked:function(){d5222.click();}})"/>
+至
+<input id="d5222" class="Wdate" type="text" onclick="WdatePicker({minDate:'#F{$dp.$D(\'d5221\')}',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+</body>
+</html>
