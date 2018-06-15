@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <!-- <meta http-equiv="refresh" content="50">-->
+    <title>百度离线版2.0DEMO</title>
+   <!-- <script type="text/javascript" src="js/apiv2.0.2.min.js"></script>
+    <script type="text/javascript" src="js/api_subway.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bmap.css"/>-->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?type=subway&v=1.0&ak=Wj2omP5ClStCR4XjgTHti0RgALAeufRG"></script>
+</head>
+<body>
+<div style="width:1800px;height:900px;border:1px solid gray" id="container"></div>
+<br>
+<br>
+<div id="list"></div>
+</body>
+</html>
+<script type="text/javascript">
+    /**
+     * 从所有城市列表中获取北京信息
+     * 结果格式
+     * {
+     *     keyword: 'beijing',
+     *     name: '上海',
+     *     citycode: '131'
+     * }
+     */
+    /* globals BMapSub */
+    var subwayCityName = '上海';
+    var list = BMapSub.SubwayCitiesList;
+    var subwaycity = null;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].name === subwayCityName) {
+            subwaycity = list[i];
+            break;
+        }
+    }
+    // 获取北京地铁数据-初始化地铁图
+    var subway = new BMapSub.Subway('container', subwaycity.citycode);
+    var zoomControl  = new BMapSub.ZoomControl({
+        anchor: BMAPSUB_ANCHOR_BOTTOM_RIGHT,
+        offset: new BMapSub.Size(10,100)
+    });
+    subway.addControl(zoomControl);
+    //subway.enableScrollWheelZoom();
+    //subway.enableContinuousZoom();
+    //var arrayLines  = subway.getLines();
+    //console.log("yqq---->"+arrayLines);
+    /*for(var i = 0; i < arrayLines.length; i++){
+        console.log(arrayLines[i].name);
+    }*/
+    subway.addEventListener('tap', function(e) {
+        //alert('您点击了"' + e.station.name + '"站');
+        //var flag = subway.markers;
+        //alert("yqq---->"+flag);
+
+        var startIcon = new BMapSub.Icon(
+            '/map/images/site.png',
+            new BMapSub.Size(50, 50)
+        );
+        var marker = new BMapSub.Marker(e.station.name, {icon: startIcon});
+        subway.addMarker(marker);
+        subway.setCenter(e.station.name);
+        //subway.setZoom(1);
+
+
+
+        var infowindow = new BMapSub.InfoWindow(
+            '<div id="bd-subwayInfo">'
+            + '<div id="bd-subwayTitle">'
+            + e.station.name
+            + '</div>'
+            + '</div>'
+        );
+        subway.openInfoWindow(infowindow, e.station.name);
+        //subway.setCenter(e.station.name);
+        subway.setZoom(1);
+        //var flag = subway.markers;
+        //alert("yqq---->"+flag);
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
